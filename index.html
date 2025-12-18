@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>יראל כברה – יועץ ומאמן לכלכלת המשפחה</title>
+
+  <!-- Font (single) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () { emailjs.init("hTTpFapqMLTz4irGW"); })();
+  </script>
+
+  <style>
+    :root{
+      --bg:#0a0e13;
+      --line:rgba(255,255,255,.10);
+      --text:#f0f5fa;
+      --muted:rgba(240,245,250,.82);
+
+      /* Brand */
+      --brand:#4ab594;
+      --brand2:#63d1b1;
+      --brandText:#041a12;
+
+      --accent:#667eea;
+      --accentLight:#8b9ff6;
+
+      --max:1180px;
+      --radius:32px;
+      --shadow:0 24px 60px rgba(0,0,0,.5);
+      --shadowXL:0 32px 80px rgba(0,0,0,.65);
+
+      /* Mint-light backdrop behind QA + testimonials */
+      --mintA: rgba(140, 255, 214, .20);
+      --mintB: rgba(170, 255, 235, .14);
+      --mintC: rgba(255,255,255,.06);
+
+      /* WhatsApp */
+      --waClassic:#25D366;
+    }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes shimmer { 0%{background-position:-1000px 0} 100%{background-position:1000px 0} }
+    @keyframes glow { 0%,100%{box-shadow:0 0 20px rgba(74,181,148,.18),0 0 40px rgba(74,181,148,.10)} 50%{box-shadow:0 0 40px rgba(74,181,148,.32),0 0 80px rgba(74,181,148,.18)} }
+
+    /* testimonials animations */
+    @keyframes tIn { from { opacity: 0; transform: translateY(14px) scale(.985); filter: blur(2px);} to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0);} }
+    @keyframes tOut { from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0);} to { opacity: 0; transform: translateY(-10px) scale(.99); filter: blur(2px);} }
+    @keyframes softSheen { 0%{transform:translateX(110%) skewX(-12deg);opacity:0} 20%{opacity:.55} 45%{opacity:0} 100%{transform:translateX(-110%) skewX(-12deg);opacity:0} }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Varela Round", system-ui, -apple-system, "Segoe UI", Arial;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(102,126,234,.15) 0%, transparent 35%),
+        radial-gradient(circle at 80% 90%, rgba(74,181,148,.12) 0%, transparent 40%),
+        radial-gradient(1400px 700px at 50% -300px, rgba(74,181,148,.08) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0e13 0%, #050709 100%);
+      background-attachment: fixed;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    p{margin:0 0 12px; line-height:1.95; color:var(--muted); font-weight:650}
+    img{max-width:100%; height:auto; display:block}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px 16px 92px;
+      animation: fadeInUp .8s ease-out;
+    }
+    .stack{display:flex; flex-direction:column; gap:24px; margin-top:24px;}
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(10,14,19,.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 4px 24px rgba(0,0,0,.3);
+    }
+    .header-in{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:10px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:78px;
+    }
+    .brandbox{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+      transition: transform .3s ease;
+    }
+    .brandbox:hover{ transform: translateX(-4px); }
+    .site-logo{
+      height:78px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 12px 24px rgba(74,181,148,.35));
+      transition: filter .3s ease;
+    }
+    .site-logo:hover{ filter: drop-shadow(0 16px 32px rgba(74,181,148,.5)); }
+    .brand-text{min-width:0}
+    .brand-text b{
+      display:block;
+      font-size:16px;
+      font-weight:900;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      letter-spacing:-.2px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand-text span{
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      color: rgba(240,245,250,.85);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    nav{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+
+    /* Buttons */
+    .btn{
+      position: relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:13px 22px;
+      border-radius:16px;
+      border:1.5px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space:nowrap;
+      overflow: hidden;
+    }
+    .btn,button,input,textarea,select{ font-family: inherit; }
+    .btn::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
+      opacity:0;
+      transition: opacity .3s ease;
+      border-radius:16px;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.28);
+      box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    }
+    .btn:hover::before{ opacity:1; }
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+      color: var(--brandText);
+      box-shadow: 0 8px 24px rgba(74,181,148,.35), 0 0 0 0 rgba(74,181,148,.4);
+      animation: glow 3s ease-in-out infinite;
+    }
+    .btn.primary:hover{
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(74,181,148,.45), 0 0 60px rgba(74,181,148,.3);
+    }
+
+    /* Card */
+    .card{
+      position:relative;
+      background:
+        radial-gradient(1200px 300px at 75% -100px, rgba(74,181,148,.08) 0%, transparent 50%),
+        radial-gradient(800px 400px at 25% 100%, rgba(102,126,234,.06) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1.5px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:36px;
+      overflow:hidden;
+      animation: fadeInUp .6s ease-out backwards;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .card::before{
+      content:'';
+      position:absolute;
+      top:-2px; left:-2px; right:-2px; bottom:-2px;
+      background: linear-gradient(135deg, rgba(74,181,148,.20), rgba(102,126,234,.15));
+      border-radius: var(--radius);
+      opacity:0;
+      transition: opacity .3s ease;
+      z-index:-1;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: var(--shadowXL); }
+    .card:hover::before{ opacity:1; }
+
+    .stack > .card:nth-child(1){animation-delay:.1s}
+    .stack > .card:nth-child(2){animation-delay:.2s}
+    .stack > .card:nth-child(3){animation-delay:.3s}
+    .stack > .card:nth-child(4){animation-delay:.4s}
+    .stack > .card:nth-child(5){animation-delay:.5s}
+    .stack > .card:nth-child(6){animation-delay:.6s}
+    .stack > .card:nth-child(7){animation-delay:.7s}
+
+    /* HERO */
+    .hero-card{ padding-bottom:0; }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:22px;
+      align-items:end;
+    }
+    .hero-text{ padding-bottom:28px; }
+    .hero-photo{
+      align-self:end;
+      justify-self:start;
+      width:360px;
+      max-width:100%;
+      margin-bottom:-2px;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.55));
+      transform: translateY(2px);
+      pointer-events:none;
+      user-select:none;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:52px;
+      line-height:1.08;
+      letter-spacing:-1.2px;
+      font-weight:900;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(240,245,250,.85) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 24px rgba(0,0,0,.3);
+    }
+    .hero-subtitle{
+      margin:0 0 12px;
+      font-size:22px;
+      line-height:1.5;
+      font-weight:900;
+      color: var(--brand2);
+      text-shadow: 0 2px 12px rgba(74,181,148,.4);
+    }
+    .hero-p{
+      margin:0 0 20px;
+      font-size:17px;
+      line-height:1.95;
+      color: rgba(240,245,250,.82);
+      font-weight:650;
+      max-width: 78ch;
+    }
+    .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:16px; }
+
+    .title{
+      margin:0 0 18px;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:-.8px;
+      line-height:1.12;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(240,245,250,.9) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .title.small{font-size:28px}
+    .strong{ color: var(--brand2); font-weight:900; text-shadow: 0 2px 8px rgba(74,181,148,.3); }
+
+    /* Bullets */
+    ul{ margin:0; padding:0; list-style:none; display:grid; gap:12px; }
+    li{
+      position: relative;
+      border-radius:20px;
+      border:1.5px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
+        rgba(255,255,255,.02);
+      line-height:1.9;
+      font-weight:800;
+      color: rgba(240,245,250,.92);
+      transition: all .3s ease;
+      overflow: hidden;
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      padding:18px 18px 18px 18px;
+    }
+    li::before{
+      content:"✓";
+      position:relative;
+      margin-top:4px;
+      flex-shrink:0;
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--brandText);
+      font-weight:900;
+    }
+    li::after{
+      content:'';
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background: linear-gradient(90deg, transparent, rgba(74,181,148,.08), transparent);
+      transition: left .5s ease;
+    }
+    li:hover{
+      transform: translateX(-4px);
+      border-color: rgba(74,181,148,.3);
+      background:
+        linear-gradient(135deg, rgba(74,181,148,.10), rgba(255,255,255,.06)),
+        rgba(255,255,255,.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+    li:hover::after{ left:100%; }
+
+    /* About */
+    .about-wrap{
+      direction:ltr;
+      display:grid;
+      grid-template-columns: 450px 1fr;
+      gap:36px;
+      align-items:center;
+    }
+    .about-photo{
+      width: 450px;
+      height: 450px;
+      border-radius: 999px;
+      border: 4px solid transparent;
+      background:
+        linear-gradient(rgba(10,14,19,1), rgba(10,14,19,1)) padding-box,
+        linear-gradient(135deg, var(--brand), var(--brand2)) border-box;
+      box-shadow: 0 0 60px rgba(74,181,148,.30), 0 24px 60px rgba(0,0,0,.5);
+      overflow:hidden;
+      justify-self: start;
+      position: relative;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .about-photo::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background: linear-gradient(45deg, transparent, rgba(74,181,148,.15), transparent);
+      animation: shimmer 3s linear infinite;
+    }
+    .about-photo:hover{
+      transform: scale(1.02);
+      box-shadow: 0 0 80px rgba(74,181,148,.45), 0 32px 80px rgba(0,0,0,.6);
+    }
+    .about-photo img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit: cover;
+      object-position: 50% 42%;
+      transform: scale(1.25);
+      transform-origin: center;
+      position: relative;
+      z-index: 1;
+    }
+    .about-text{ direction:rtl; text-align:right; }
+
+    /* PROCESS */
+    .meetings{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:20px;
+      perspective:1200px;
+    }
+    .meeting{ height:300px; }
+    .flip{
+      width:100%;
+      height:100%;
+      position:relative;
+      transform-style:preserve-3d;
+      transition:transform .75s cubic-bezier(.2,.8,.2,1);
+      border-radius:34px;
+      will-change: transform;
+    }
+    .meeting:hover .flip,
+    .meeting.is-flipped .flip{ transform:rotateY(180deg); }
+    .face{
+      position:absolute;
+      inset:0;
+      backface-visibility:hidden;
+      border-radius:34px;
+      padding:26px;
+      display:flex;
+      justify-content:center;
+      text-align:center;
+    }
+    .front{
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      color:var(--brandText);
+      box-shadow: 0 24px 60px rgba(74,181,148,.22);
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .front .m-top{ font-size:18px; font-weight:900; letter-spacing:-.2px; opacity:.92; margin:0; }
+    .front .m-title{
+      margin:0;
+      width:100%;
+      max-width:22ch;
+      font-size:28px;
+      font-weight:900;
+      line-height:1.2;
+      letter-spacing:-.4px;
+      min-height:62px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .back{
+      background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+      color:var(--text);
+      transform:rotateY(180deg);
+      align-items:center;
+      flex-direction:column;
+      box-shadow: var(--shadowXL);
+      border:1.5px solid rgba(255,255,255,.10);
+    }
+    .m-text{
+      margin:0;
+      font-size:17.5px;
+      line-height:1.95;
+      font-weight:850;
+      max-width:36ch;
+      color: rgba(240,245,250,.90);
+    }
+
+    .between{
+      margin-top:18px;
+      border-radius:28px;
+      border:1.5px solid rgba(255,255,255,.13);
+      background:
+        radial-gradient(1100px 340px at 85% -70px, rgba(99,209,177,.20) 0%, transparent 62%),
+        radial-gradient(900px 260px at 15% 120%, rgba(102,126,234,.10) 0%, transparent 64%),
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      padding:18px 18px 16px;
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+    .between::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:7px;
+      background: linear-gradient(90deg, transparent, rgba(99,209,177,.95), transparent);
+      opacity:.95;
+    }
+    .between-top{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:12px;
+      text-align:center;
+    }
+    .between-icon{
+      flex:0 0 auto;
+      width:46px; height:46px;
+      border-radius:16px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--brandText);
+      font-weight:900;
+      box-shadow: 0 16px 30px rgba(0,0,0,.35);
+    }
+    .between h3{ margin:0; font-size:20px; font-weight:900; letter-spacing:-.3px; color:#fff; text-align:center; }
+    .between p{ margin:6px 0 0; color: rgba(240,245,250,.86); line-height:1.9; font-weight:750; max-width: 78ch; text-align:center; }
+    .chips{ margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .chip{
+      border:1.5px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(240,245,250,.92);
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      letter-spacing:-.2px;
+    }
+    .mini-cta{
+      margin-top:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      padding-top:12px;
+      color: rgba(240,245,250,.90);
+      font-weight:900;
+      letter-spacing:-.2px;
+      line-height:1.75;
+      text-align:center;
+    }
+    .mini-cta b{ color: rgba(99,209,177,.95); }
+
+    /* FAQ */
+    .faq details{
+      border:1.5px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
+        rgba(255,255,255,.02);
+      border-radius:20px;
+      padding:18px 18px;
+      transition: all .3s ease;
+    }
+    .faq details:hover{
+      border-color: rgba(74,181,148,.3);
+      background:
+        linear-gradient(135deg, rgba(74,181,148,.08), rgba(255,255,255,.06)),
+        rgba(255,255,255,.04);
+    }
+    .faq details + details{margin-top:12px}
+    .faq summary{ cursor:pointer; font-weight:900; list-style:none; line-height:1.6; color: var(--text); transition: color .3s ease; }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq details[open] summary{ color: var(--brand2); text-shadow: 0 2px 8px rgba(74,181,148,.3); }
+    .faq .answer{ margin-top:12px; color: rgba(240,245,250,.82); font-weight:650; line-height:1.95; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); }
+    .faq .title.small{ text-align:center; }
+    .qmark{ color: var(--brand2); font-weight:900; text-shadow: 0 2px 10px rgba(74,181,148,.22); }
+
+    /* Form */
+    .form-shell{max-width: 680px; margin: 0 auto;}
+    .form{display:grid; gap:16px;}
+    .row-2{display:grid; grid-template-columns: 1fr 1fr; gap:16px;}
+    label{
+      display:block;
+      margin:0 0 8px;
+      font-size:13px;
+      color: var(--brand2);
+      font-weight:900;
+      text-shadow: 0 2px 10px rgba(74,181,148,.18);
+    }
+    input, textarea{
+      width:100%;
+      padding:16px 16px;
+      border-radius:18px;
+      border:1.5px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      outline:none;
+      font-size:16px;
+      font-weight:650;
+      transition: all .3s ease;
+      font-family: inherit;
+    }
+    input::placeholder, textarea::placeholder{
+      color: rgba(240,245,250,.40);
+      font-weight:650;
+    }
+    input:focus, textarea:focus{
+      border-color: var(--brand);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 0 0 3px rgba(74,181,148,.15);
+    }
+    textarea{min-height:130px; resize:vertical}
+
+    .status{
+      display:none;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1.5px solid rgba(74,181,148,.3);
+      background: rgba(74,181,148,.1);
+      color: var(--brand2);
+      font-size:14px;
+      line-height:1.7;
+      font-weight:800;
+    }
+
+    .form-floatline{
+      width: fit-content;
+      margin: -6px auto 16px;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1.5px solid rgba(74,181,148,.30);
+      background: linear-gradient(135deg, rgba(74,181,148,.16), rgba(102,126,234,.10));
+      box-shadow: 0 10px 24px rgba(0,0,0,.28), 0 0 30px rgba(74,181,148,.10);
+      font-weight:900;
+      letter-spacing:-.2px;
+      color: rgba(240,245,250,.95);
+      animation: float 3.2s ease-in-out infinite;
+      text-align:center;
+      font-size:20px;
+      line-height:1.2;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:0;
+      padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.12);
+      color: rgba(240,245,250,.75);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-weight:800;
+    }
+    footer a{
+      border-bottom:1px dashed rgba(240,245,250,.4);
+      transition: all .3s ease;
+    }
+    footer a:hover{ color: var(--brand2); border-bottom-color: var(--brand2); }
+
+    /* ===== ASD (למי זה מתאים) ===== */
+    .fit-section{ position:relative; padding-top: 210px; }
+    .section-title{
+      position:absolute;
+      top:18px;
+      left:50%;
+      transform: translateX(-50%);
+      margin:0;
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:-.8px;
+      line-height:1.1;
+      text-align:center;
+      z-index:2;
+      pointer-events:none;
+      white-space:nowrap;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(240,245,250,.88) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      text-shadow: 0 10px 28px rgba(0,0,0,.45);
+    }
+    .fit-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:22px;
+      align-items:stretch;
+      margin-top:0;
+      position:relative;
+      z-index:1;
+    }
+    .fit-card{
+      position:relative;
+      border-radius:28px;
+      min-height: 260px;
+      padding:138px 20px 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1.5px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      overflow:visible;
+    }
+    .fit-figure{
+      position:absolute;
+      left:50%;
+      top: 42%;
+      transform: translate(-50%, -62%);
+      width:400px;
+      height:auto;
+      z-index:3;
+      filter: drop-shadow(0 22px 32px rgba(0,0,0,.6));
+      pointer-events:none;
+    }
+    .fit-h{
+      margin:0 0 8px;
+      font-size:21px;
+      font-weight:900;
+      letter-spacing:-.3px;
+      color:#fff;
+      text-align:center;
+    }
+    .fit-p{
+      margin:0;
+      font-size:15px;
+      line-height:1.8;
+      color: rgba(240,245,250,.86);
+      font-weight:750;
+      text-align:center;
+    }
+
+    .not-wrap{
+      margin-top:22px;
+      border-radius:28px;
+      border:1.5px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(1100px 340px at 85% -70px, rgba(255,77,109,.22) 0%, transparent 62%),
+        radial-gradient(900px 260px at 15% 120%, rgba(102,126,234,.07) 0%, transparent 64%),
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .not-wrap::before{
+      content:"";
+      position:absolute;
+      top:0; right:0; left:0;
+      height:7px;
+      background: linear-gradient(90deg, rgba(255,77,109,0), rgba(255,77,109,.95), rgba(255,107,134,0));
+      opacity:1;
+    }
+    .not-title{
+      text-align: center;
+      margin:0 0 12px;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.3px;
+      color:#fff;
+      position:relative;
+      z-index:1;
+      text-shadow: 0 10px 26px rgba(0,0,0,.45);
+    }
+    .not-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin:0;
+      padding:0;
+      list-style:none;
+      position:relative;
+      z-index:1;
+    }
+    .not-item{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1.5px solid rgba(255,255,255,.13);
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color: rgba(240,245,250,.94);
+      font-weight:850;
+      line-height:1.75;
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+      transform:none;
+    }
+    .not-item::before{ content:none !important; display:none !important; }
+    .not-item::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(720px 260px at 85% 0%, rgba(255,77,109,.16) 0%, transparent 62%);
+      opacity:1;
+      pointer-events:none;
+    }
+    .not-item:hover{ transform:none; }
+    .not-item .mark{
+      flex:0 0 auto;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,77,109,.26);
+      border:1px solid rgba(255,77,109,.48);
+      color: rgba(240,245,250,.98);
+      font-weight:900;
+      z-index:1;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
+    .not-item span:last-child{ z-index:1; }
+
+    /* ===== QA + Testimonials zone ===== */
+    .qa-zone{
+      position:relative;
+      border-radius: 36px;
+      padding: 22px;
+      border: 1.5px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(1100px 520px at 15% 25%, var(--mintA) 0%, transparent 58%),
+        radial-gradient(900px 480px at 85% 70%, var(--mintB) 0%, transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 18px 55px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+    .qa-zone::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 38px;
+      background: linear-gradient(135deg, rgba(74,181,148,.18), rgba(102,126,234,.12));
+      opacity:.0;
+      transition: opacity .35s ease;
+      z-index:-1;
+    }
+    .qa-zone:hover::before{ opacity:.9; }
+
+    .qa-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:24px;
+      align-items:stretch;
+    }
+    .qa-row > .card{ height:100%; display:flex; flex-direction:column; }
+
+    /* ===== Testimonials ===== */
+    .testimonials{ position:relative; }
+    .testimonials .title.small{ text-align:center; margin-bottom:14px; }
+
+    .t-shell{
+      position:relative;
+      border-radius: 24px;
+      border:1.5px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 320px at 80% 0%, rgba(99,209,177,.16) 0%, transparent 58%),
+        radial-gradient(700px 260px at 15% 100%, rgba(102,126,234,.10) 0%, transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      box-shadow: 0 18px 48px rgba(0,0,0,.28);
+      overflow:hidden;
+      padding: 20px;
+      min-height: 340px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      touch-action: pan-y;
+    }
+    .t-shell::after{
+      content:"";
+      position:absolute;
+      top:-40%;
+      left:-60%;
+      width: 160%;
+      height: 220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      opacity:.0;
+      transform: translateX(110%) skewX(-12deg);
+      pointer-events:none;
+    }
+    .t-shell.sheen::after{ animation: softSheen 3.8s ease-in-out 1; opacity:1; }
+
+    .t-card{ width:100%; max-width:52ch; padding:10px 6px; will-change: transform, opacity, filter; }
+    .t-name{
+      margin:0 0 10px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing:-.2px;
+      color: var(--brand2);
+      text-shadow: 0 2px 10px rgba(74,181,148,.22);
+    }
+    .t-text{
+      margin:0;
+      font-size: 14.6px;
+      line-height: 1.95;
+      font-weight: 700;
+      color: rgba(240,245,250,.86);
+      padding: 0 6px;
+      overflow-wrap:anywhere;
+    }
+    .t-card.is-in{ animation: tIn .52s ease both; }
+    .t-card.is-out{ animation: tOut .42s ease both; }
+
+    .t-dots{
+      margin-top: 14px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .t-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.10);
+      opacity:.65;
+      transform: scale(.95);
+      transition: all .25s ease;
+    }
+    .t-dot.active{
+      opacity:1;
+      transform: scale(1.15);
+      border-color: rgba(99,209,177,.65);
+      background: linear-gradient(135deg, rgba(74,181,148,.95), rgba(99,209,177,.95));
+      box-shadow: 0 0 0 3px rgba(74,181,148,.16);
+    }
+
+    /* ===== Form centered below ===== */
+    .lead-row{ margin-top: 22px; display:flex; justify-content:center; }
+    .lead-card{ width: min(720px, 100%); padding: 32px; }
+
+    /* ===== WhatsApp fixed icon (NOW: desktop looks like mobile too) ===== */
+    .wa-fab{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: var(--waClassic);
+      border: 1.5px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 26px rgba(37,211,102,.55);
+      z-index: 999;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .wa-fab:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.28);
+      box-shadow: 0 22px 52px rgba(0,0,0,.55), 0 0 36px rgba(37,211,102,.65);
+    }
+    .wa-badge{
+      position:absolute;
+      inset:0;
+      border-radius:18px;
+      pointer-events:none;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22);
+      opacity:.95;
+    }
+    .wa-icon-classic{
+      width:28px;
+      height:28px;
+      display:block;
+      fill:#fff;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    /* ===== Desktop -> Tablet ===== */
+    @media (max-width: 980px){
+      header{position:relative}
+      h1{font-size:38px}
+      .title{font-size:28px}
+      .title.small{font-size:24px}
+      nav{width:100%}
+      nav .btn{flex:1; min-width:160px}
+      .site-logo{height:70px}
+
+      .meetings{grid-template-columns:1fr}
+      .meeting{height:290px}
+      .front .m-title{min-height:auto}
+
+      .about-wrap{ direction:rtl; grid-template-columns: 1fr; text-align:center; }
+      .about-photo{ width: 280px; height: 280px; justify-self:center; }
+      .about-text{text-align:center}
+
+      .card{padding: 28px 24px;}
+
+      .fit-section{ padding-top: 88px; }
+      .section-title{ font-size:28px; top:16px; }
+      .fit-grid{ grid-template-columns: 1fr; gap:18px; }
+      .fit-card{ min-height:auto; padding:130px 18px 18px; }
+      .fit-figure{ width:320px; top: 22%; transform: translate(-50%, -64%); }
+      .not-grid{ grid-template-columns: 1fr; }
+
+      .qa-zone{ padding: 16px; border-radius: 28px; }
+      .qa-row{ grid-template-columns: 1fr; }
+      .t-shell{ min-height: 320px; }
+      .lead-card{ padding: 28px 24px; }
+
+      .hero-inner{ grid-template-columns: 1fr; }
+      .hero-photo{ width: 300px; justify-self:center; margin-bottom:-8px; }
+      .hero-text{ padding-bottom: 18px; text-align:center; }
+      .hero-cta{ justify-content:center; }
+    }
+
+    /* ===== Mobile only (ONLY the mobile tweaks) ===== */
+    @media (max-width: 520px){
+      .wrap{ padding:14px 12px 88px; }
+      .stack{ gap:18px; margin-top:18px; }
+      .card{ padding: 22px 18px; border-radius: 26px; }
+      .qa-zone{ padding: 14px; border-radius: 24px; }
+
+      /* כותרות פחות דהויות במובייל */
+      h1, .title, .section-title{
+        background: none !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: unset !important;
+        color: rgba(255,255,255,.96) !important;
+        text-shadow: 0 10px 26px rgba(0,0,0,.55) !important;
+      }
+
+      /* HEADER: פירמידה + לוגו גדול וצמוד */
+      .header-in{
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap:10px;
+        padding: 12px 12px 10px;
+        min-height:auto;
+      }
+      .brandbox{
+        flex-direction:column;
+        align-items:center;
+        gap:0;
+        transform:none !important;
+      }
+      .site-logo{
+        height:auto;
+        width:120px;
+        margin-bottom:-12px;
+      }
+      .brand-text{ text-align:center; }
+      .brand-text b{
+        font-size:21px;
+        -webkit-text-fill-color: unset !important;
+        color: rgba(255,255,255,.96) !important;
+        background:none !important;
+        text-shadow: 0 10px 26px rgba(0,0,0,.55) !important;
+        margin-bottom:-2px;
+      }
+      .brand-text span{
+        font-size:14px;
+        color: rgba(240,245,250,.86);
+      }
+
+      /* כפתורים קטנים יותר */
+      nav{ width:100%; justify-content:center; gap:10px; }
+      nav .btn{
+        padding:10px 12px;
+        font-size:13px;
+        border-radius:14px;
+        min-width:auto;
+        flex: 0 0 auto;
+      }
+
+      /* HERO טיפוגרפיה */
+      h1{ font-size: 30px; line-height: 1.12; letter-spacing:-.8px; margin-bottom: 12px; }
+      .hero-subtitle{ font-size: 16px; line-height: 1.55; margin-bottom: 10px; }
+      .hero-p{ font-size: 14.5px; line-height: 1.9; margin-bottom: 14px; }
+      .btn{ padding:12px 16px; font-size:14px; border-radius:14px; }
+
+      .title{ font-size: 22px; line-height:1.18; margin-bottom: 14px; }
+      .title.small{ font-size: 20px; margin-bottom: 12px; }
+      p{ font-size: 14.5px; line-height: 1.9; }
+
+      /* תהליך – במובייל מציגים גם כותרת וגם טקסט בלי flip */
+      .meetings{ gap:14px; }
+      .meeting{ height:auto !important; }
+      .flip{ height:auto !important; transform:none !important; transform-style: flat !important; transition:none !important; }
+      .face{
+        position: relative !important;
+        inset:auto !important;
+        backface-visibility: visible !important;
+        transform:none !important;
+        padding:18px !important;
+        border-radius: 22px !important;
+        display:block !important;
+        text-align:center !important;
+      }
+      .front{ box-shadow: 0 18px 44px rgba(74,181,148,.18) !important; }
+      .back{ margin-top:12px; border-radius: 22px !important; padding:18px !important; }
+      .front .m-top{ font-size:15px; }
+      .front .m-title{ font-size:20px; min-height:auto; }
+      .m-text{ font-size:14.5px; line-height:1.9; max-width:none; }
+
+      /* בין פגישה לפגישה – בלי האייקון */
+      .between-top{ gap:0; }
+      .between-icon{ display:none !important; }
+
+      /* "למי זה מתאים" – תמונות קרובות יותר לכותרות (אבל לא נוגעות בכותרת הראשית של הסקשן) */
+      .fit-section{ padding-top: 92px; } /* טיפה יותר מרווח מהכותרת הראשית */
+      .section-title{ font-size:28px; top:16px; }
+      .fit-grid{ grid-template-columns:1fr; gap:60px; }
+
+      .fit-card{
+        overflow:visible;
+        padding-top: 176px;      /* פחות padding => התמונה קרובה יותר לכותרת של הכרטיס */
+      }
+      .fit-figure{
+        width: 320px;
+        top:135px;              /* יורד מעט => התמונה "מתקרבת" לכותרת של הכרטיס */
+        transform: translate(-50%, -58%); /* יוצאת יותר מהכרטיס בלי להיתקע */
+      }
+      .fit-h{ font-size:18px; margin-top:-2px; }
+      .fit-p{ font-size:14.5px; line-height:1.85; }
+
+      /* המלצות – אנימציה מהירה יותר */
+      .t-card.is-in{ animation-duration: .32s !important; }
+      .t-card.is-out{ animation-duration: .26s !important; }
+      .t-shell{ padding: 16px; min-height: 290px; }
+      .t-name{ font-size: 16px; }
+      .t-text{ font-size: 13.8px; line-height: 1.9; }
+
+      /* רשימות */
+      li{ font-size: 14.5px; line-height: 1.85; padding: 16px 16px; }
+      li::before{ width:26px; height:26px; }
+
+      /* FAQ */
+      .faq details{ padding: 16px 16px; border-radius: 18px; }
+      .faq summary{ font-size: 14.5px; }
+      .faq .answer{ font-size: 14.5px; }
+
+      /* טופס – placeholder קטן יותר */
+      label{ font-size: 12.5px; }
+      input, textarea{ font-size: 15px; padding: 14px 14px; border-radius: 16px; }
+      textarea{ min-height: 120px; }
+      input::placeholder, textarea::placeholder{
+        font-size: 12.5px;
+        line-height: 1.2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WhatsApp fixed icon -->
+  <a class="wa-fab"
+     href="https://wa.me/972543944984?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%90%D7%9C%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94"
+     target="_blank"
+     rel="noopener"
+     aria-label="וואטסאפ">
+    <span class="wa-badge"></span>
+
+    <!-- Classic icon (same for desktop + mobile) -->
+    <svg class="wa-icon-classic" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.52 3.48A11.94 11.94 0 0012.01 0C5.38 0 0 5.38 0 12c0 2.11.55 4.17 1.6 6.01L0 24l6.17-1.62A11.93 11.93 0 0012.01 24C18.63 24 24 18.62 24 12c0-3.19-1.24-6.19-3.49-8.52zM12 21.9c-1.87 0-3.71-.5-5.31-1.45l-.38-.22-3.66.96.98-3.56-.24-.37A9.9 9.9 0 012.1 12C2.1 6.53 6.53 2.1 12 2.1c2.64 0 5.12 1.03 6.99 2.9A9.83 9.83 0 0121.9 12c0 5.47-4.43 9.9-9.9 9.9z"/>
+      <path d="M17.07 14.55c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.66.15-.2.3-.76.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.59-.91-2.18-.24-.58-.48-.5-.66-.51h-.56c-.2 0-.52.08-.8.37-.27.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.15 4.56.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/>
+    </svg>
+  </a>
+
+  <header>
+    <div class="header-in">
+      <a class="brandbox" href="#top" aria-label="בית">
+        <img src="logo.png" class="site-logo" alt="יראל כברה" />
+        <div class="brand-text">
+          <b>יראל כברה</b>
+          <span>יועץ ומאמן לכלכלת המשפחה</span>
+        </div>
+      </a>
+
+      <nav aria-label="כפתורים">
+        <a class="btn" href="#how">איך זה עובד</a>
+        <a class="btn" href="#faq">שאלות</a>
+        <a class="btn primary" href="#lead">יראל, בוא נעשה סדר</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap" id="top">
+    <div class="stack">
+
+      <!-- HERO -->
+      <main class="card hero-card" aria-label="HERO">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1>המשכורת נכנסת -<br>והמינוס עדיין גדל?</h1>
+            <p class="hero-subtitle">המינוס לא ייעלם מעצמו - הנה איך משפחות כמוכם הופכות את הגירעון להון.</p>
+            <p class="hero-p">בעזרת שיטה מוכחת וליווי אישי מותאם, תלמדו לעצור את המינוס, להחזיר שליטה על הכסף, ולהתחיל לבנות חיסכון יציב שמתאים לחיים שלכם.</p>
+            <div class="hero-cta">
+              <a class="btn primary" href="#lead">יראל, בוא נעשה סדר</a>
+              <a class="btn" href="#how">איך זה עובד</a>
+            </div>
+          </div>
+          <img src="a.png" alt="יראל כברה" class="hero-photo">
+        </div>
+      </main>
+
+      <!-- למה זה דחוף עכשיו -->
+      <section class="card" aria-label="למה זה דחוף עכשיו">
+        <h2 class="title">יוקר המחיה בישראל לא מחכה לאף אחד!</h2>
+        <p>המחירים עולים, התקציב נלחץ, וזה כבר ברור: זו לא תקלה זמנית - זו המציאות.</p>
+        <p>כדי להתמודד, צריך <span class="strong">תוכנית פעולה ברורה</span>.<br>
+          צעד-צעד, עם ליווי אישי ומדויק, אפשר לעצור את ההחלקה למינוס, להחזיר שליטה מלאה על הכסף, ולהוכיח לעצמכם שהחיסכון אפשרי.</p>
+        <p class="strong">וזה בדיוק המקום שבו אני נכנס לתמונה.</p>
+      </section>
+
+      <!-- מה יקרה -->
+      <section class="card" aria-label="מה יקרה למצב הפיננסי שלכם איתי">
+        <h2 class="title">מה יקרה למצב הפיננסי שלכם איתי?</h2>
+        <ul>
+          <li>תקבלו שליטה מלאה וברורה על ההכנסות וההוצאות.</li>
+          <li>תבנו תקציב מאוזן שמאפשר גם חיסכון וגם איכות חיים.</li>
+          <li>תסדירו את ניהול ההתחייבויות ותסגרו את המינוס.</li>
+          <li>תתחילו להפריש חיסכון חודשי שיבנה הון עצמי.</li>
+          <li>תבססו ביטחון כלכלי לטווח ארוך עבור המשפחה.</li>
+        </ul>
+      </section>
+
+      <!-- למי זה מתאים -->
+      <section class="card fit-section" aria-label="למי זה מתאים">
+        <h2 class="section-title">למי זה מתאים?</h2>
+
+        <div class="fit-grid">
+          <article class="fit-card">
+            <img class="fit-figure" src="c.png" alt="זוגות צעירים" />
+            <h3 class="fit-h">זוגות צעירים</h3>
+            <p class="fit-p">לזוגות צעירים שמרוויחים יפה, אבל עדיין מוצאים את עצמם במינוס.</p>
+          </article>
+
+          <article class="fit-card">
+            <img class="fit-figure" src="f.png" alt="משפחות" />
+            <h3 class="fit-h">משפחות</h3>
+            <p class="fit-p">למשפחות עם ילד או שניים שמתקשות כלכלית ורוצות להתחיל לחסוך לעתיד.</p>
+          </article>
+
+          <article class="fit-card">
+            <img class="fit-figure" src="s.png" alt="יחידים" />
+            <h3 class="fit-h">יחידים</h3>
+            <p class="fit-p">למי שמרגיש שאין לו שליטה על הכסף ורוצה יציבות כלכלית וסדר ברור בלי לוותר על איכות החיים.</p>
+          </article>
+        </div>
+
+        <div class="not-wrap" aria-label="לא מתאים">
+          <h3 class="not-title">לא מתאים:</h3>
+          <ul class="not-grid">
+            <li class="not-item"><span class="mark">✕</span><span>מי שמחפש פתרון “קסם” בלי שינוי הרגלים ובלי יישום.</span></li>
+            <li class="not-item"><span class="mark">✕</span><span>מי שלא מוכן להסתכל למספרים בעיניים ולקבל החלטות.</span></li>
+            <li class="not-item"><span class="mark">✕</span><span>מי שמצפה שמישהו אחר יעשה בשבילו — בלי אחריות אישית.</span></li>
+            <li class="not-item"><span class="mark">✕</span><span>מי שלא יכול להקדיש זמן לפגישות ולעבודה בין לבין.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- נעים מאוד -->
+      <section class="card" aria-label="נעים מאוד">
+        <h2 class="title">נעים מאוד (:</h2>
+
+        <div class="about-wrap">
+          <div class="about-photo">
+            <img src="me.jpg.png" alt="יראל כברה">
+          </div>
+
+          <div class="about-text">
+            <p>אני יראל כברה, יועץ ומאמן לכלכלת המשפחה למשפחות וזוגות צעירים. את המסע שלי בעולם הפיננסי התחליתי מהצורך האישי שלי ושל אשתי שהיה לצאת מהסחרור הכלכלי שהיינו בו.</p>
+            <p>ב"ה איזנו את התקציב שלנו והתחלנו לבנות חיסכון יציב המבטיח לנו עתיד כלכלי בטוח יותר. עם הזמן, אני לא רק למדתי לשפר את המצב הכלכלי הפרטי שלי, אלא גם למדתי לשפר את המצב הכלכלי של משפחות אחרות, ועזרתי להן לבנות בסיס כלכלי יציב עם יעדים לטווח הארוך.</p>
+            <p>לא נולדתי עם ידע כלכלי – למדתי בדרך הקשה, כמו רובנו. אבל מה שגרם לי להתמחות היה השילוב בין הרצון להעניק למשפחה שלי ביטחון כלכלי והבנה של דבר, שכולם יכולים לחיות בצורה נבונה יותר עם הכסף שלנו, אם רק נקבל את הכלים המותאמים.</p>
+            <p>על הדרך, הבנתי שכל משפחה היא עולם בפני עצמו – מה שמתאים לאחד, לא בהכרח יתאים לאחר. לכן, אני לא בא עם פתרונות "מדף". אני בא להקשיב, להבין את הצרכים שלכם לעומק, ולבנות יחד תוכנית פעולה שתהיה ישימה עבורכם, בלי קלישאות ובלי מילים גבוהות. פשוט מה שיעבוד.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- איך זה עובד -->
+      <section class="card" id="how" aria-label="איך נראה התהליך בפועל">
+        <h2 class="title">איך נראה התהליך בפועל?</h2>
+
+        <div class="meetings">
+          <article class="meeting">
+            <div class="flip">
+              <div class="face front">
+                <p class="m-top">פגישה ראשונה:</p>
+                <h3 class="m-title">מיפוי ותכנון כלכלי</h3>
+              </div>
+              <div class="face back">
+                <p class="m-text">סקירה מלאה של הכנסות/הוצאות/הלוואות/התחייבויות. תמונת מצב ברורה + תקציב חדש ומאוזן שמחזיר שליטה כבר מההתחלה.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="meeting">
+            <div class="flip">
+              <div class="face front">
+                <p class="m-top">פגישה שנייה:</p>
+                <h3 class="m-title">בקרה והעמקה</h3>
+              </div>
+              <div class="face back">
+                <p class="m-text">בדיקת יישום בפועל, תיקון נקודות חלשות, והעמקה בהרגלי צריכה עם כלים מעשיים לחיסכון עקבי.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="meeting">
+            <div class="flip">
+              <div class="face front">
+                <p class="m-top">פגישה שלישית:</p>
+                <h3 class="m-title">בניית תוכנית חיסכון</h3>
+              </div>
+              <div class="face back">
+                <p class="m-text">תוכנית חיסכון ליעדים הגדולים, היערכות לאירועים משמעותיים, והנחת יסודות לביטחון כלכלי ארוך טווח.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="between" aria-label="בין פגישה לפגישה">
+          <div class="between-top">
+            <div class="between-icon">✓</div>
+            <div>
+              <h3>בין פגישה לפגישה אתם לא לבד</h3>
+              <p>
+                רוב האנשים מבינים מה צריך לעשות — אבל נופלים ביישום. כאן בדיוק נכנס הליווי:
+                מענה מהיר, חידוד החלטות בזמן אמת, ודיוק שבועי קטן שמצטבר לתוצאות גדולות בחשבון הבנק.
+              </p>
+            </div>
+          </div>
+
+          <div class="chips">
+            <div class="chip">קבוצת וואטסאפ אישית</div>
+            <div class="chip">מענה מהיר לשאלות</div>
+            <div class="chip">טיפים שבועיים</div>
+          </div>
+
+          <div class="mini-cta">
+            <b>המטרה:</b> שלא תצאו מהפגישה “מלאים מוטיבציה” — אלא תראו תוצאות בפועל, שבוע אחרי שבוע.
+          </div>
+        </div>
+      </section>
+
+      <!-- QA + Testimonials + Form -->
+      <section class="qa-zone" aria-label="שאלות + המלצות + טופס">
+
+        <div class="qa-row">
+          <!-- Testimonials -->
+          <section class="card testimonials" aria-label="המלצות">
+            <h2 class="title small">המלצות:</h2>
+
+            <div class="t-shell" id="tShell" aria-live="polite">
+              <div class="t-card is-in" id="tCard">
+                <h3 class="t-name" id="tName">אלעד ושירן קטמאו</h3>
+                <p class="t-text" id="tText">
+                  הגענו ליראל עם תחושת בלבול וחוסר שליטה על ההוצאות שלנו. כבר אחרי הפגישה הראשונה, קיבלנו תוכנית כלכלית ברורה ומעשית שהכניסה אותנו למסלול הנכון.
+                  בזכות הליווי המקצועי והמדויק שלו, הצלחנו לחסוך למעלה מ-8000 ש"ח כל חודש. יראל עזר לנו להפסיק לבזבז כסף על דברים מיותרים ולבנות תשתית כלכלית יציבה עם מבט קדימה לעבר היעדים שלנו.
+                  אנחנו ממליצים עליו בחום לכל מי שמחפש פתרונות אמיתיים לניהול הכסף שלו.
+                </p>
+              </div>
+            </div>
+
+            <div class="t-dots" id="tDots" aria-label="אינדיקציה להמלצות"></div>
+          </section>
+
+          <!-- FAQ -->
+          <section class="card faq" id="faq" aria-label="שאלות ותשובות">
+            <h2 class="title small">שאלות ותשובות:</h2>
+
+            <details>
+              <summary><span class="qmark">שאלה:</span> כמה זמן עד שרואים תוצאות?</summary>
+              <div class="answer">תשובה: כבר מהחודש הראשון תרגישו שינוי בחשבון הבנק ובתחושת השליטה.</div>
+            </details>
+
+            <details>
+              <summary><span class="qmark">שאלה:</span> איך אפשר לדעת שהתהליך באמת יעבוד בשבילנו?</summary>
+              <div class="answer">תשובה: בגלל שהליווי מותאם אישית למצב שלכם – לא מדובר בשבלונה קבועה. אנחנו בונים יחד תוכנית שמתאימה בדיוק להכנסות, להוצאות ולחלומות שלכם, ומוודאים צעד־צעד שזה קורה בפועל.</div>
+            </details>
+
+            <details>
+              <summary><span class="qmark">שאלה:</span> מפחיד אותנו להוציא כסף על זה – גם ככה המצב הכלכלי לא פשוט.</summary>
+              <div class="answer">תשובה: החשש מובן, אבל חשוב להבין: זו לא הוצאה – זו השקעה שמחזירה את עצמה. הליווי עוזר לא רק לסגור את המינוס אלא גם להתחיל לחסוך בצורה יציבה. מהצד השני, אם לא תשקיעו ותמשיכו כמו היום – המינוס רק יעמיק והמחיר העתידי יהיה גבוה בהרבה.</div>
+            </details>
+
+            <details>
+              <summary><span class="qmark">שאלה:</span> מה אם המשכורת שלנו לא מספיק גבוהה?</summary>
+              <div class="answer">תשובה: השיטה לא מבוססת על גובה ההכנסה בלבד, אלא על ניהול נכון של מה שכבר נכנס. גם עם שכר ממוצע אפשר לסגור מינוס, לייצר חיסכון ולהתכונן לעתיד – כשהכול מותאם אישית ליכולות שלכם.</div>
+            </details>
+
+            <details>
+              <summary><span class="qmark">שאלה:</span> האם זה מתאים רק למי שכבר במינוס?</summary>
+              <div class="answer">תשובה: לא. גם מי שרוצה למנוע הידרדרות או להתחיל לחסוך לטווח ארוך יפיק מכך ערך רב.</div>
+            </details>
+          </section>
+        </div>
+
+        <!-- FORM -->
+        <div class="lead-row">
+          <section class="card lead-card" id="lead" aria-label="לשיחת התאמה">
+            <div class="form-floatline">לשיחת התאמה</div>
+
+            <div class="form-shell">
+              <form class="form" onsubmit="return handleSubmit(event)">
+                <div class="row-2">
+                  <div>
+                    <label for="name">שם מלא</label>
+                    <input id="name" name="name" autocomplete="name" required placeholder='לדוגמה: נריה כהן' />
+                  </div>
+                  <div>
+                    <label for="phone">טלפון</label>
+                    <input id="phone" name="phone" autocomplete="tel" required placeholder="לדוגמה: 054-1234567" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="status">מה המצב הכלכלי כרגע?</label>
+                  <input id="status" name="status" placeholder='לדוגמה: במינוס 8,000 ₪' />
+                </div>
+
+                <div>
+                  <label for="note">מה היעד הקרוב שלכם?</label>
+                  <textarea id="note" name="note" placeholder='לדוגמה: לסגור מינוס ולהתחיל לחסוך 1,000 ₪ בחודש'></textarea>
+                </div>
+
+                <button class="btn primary" id="submitBtn" type="submit">יראל, בוא נעשה סדר</button>
+                <div class="status" id="statusBox">שולח פרטים…</div>
+              </form>
+
+              <footer>
+                <div>© <span id="year"></span> יראל כברה</div>
+                <div>
+                  <a href="#lead">שיחת התאמה</a> ·
+                  <a href="#how">איך זה עובד</a> ·
+                  <a href="#top">למעלה</a>
+                </div>
+              </footer>
+            </div>
+          </section>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth scroll with header offset
+    (function(){
+      const header = document.querySelector("header");
+      const getOffset = () => header ? header.getBoundingClientRect().height + 10 : 0;
+
+      document.addEventListener("click", function(e){
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+
+        const id = a.getAttribute("href");
+        if(!id || id === "#") return;
+
+        const target = document.querySelector(id);
+        if(!target) return;
+
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - getOffset();
+        window.scrollTo({ top: y, behavior: "smooth" });
+        history.pushState(null, "", id);
+      });
+    })();
+
+    function showStatus(text){
+      const box = document.getElementById("statusBox");
+      box.style.display = "block";
+      box.textContent = text;
+    }
+
+    function setLoading(isLoading){
+      const btn = document.getElementById("submitBtn");
+      btn.disabled = isLoading;
+      btn.style.opacity = isLoading ? ".78" : "1";
+      btn.textContent = isLoading ? "שולח…" : "יראל, בוא נעשה סדר";
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+
+      const name   = document.getElementById("name").value.trim();
+      const phone  = document.getElementById("phone").value.trim();
+      const status = document.getElementById("status").value.trim();
+      const note   = document.getElementById("note").value.trim();
+
+      const data = {
+        name: name,
+        phone: phone,
+        status: status || "לא צוין",
+        note: note || "לא צוין"
+      };
+
+      showStatus("שולח פרטים…");
+      setLoading(true);
+
+      emailjs.send("service_2kq8ggn", "template_48054rn", data)
+        .then(function(){
+          const whatsappNumber = "972543944984";
+          const msg = encodeURIComponent("היי יראל, אשמח לשיחת התאמה");
+          window.location.href = "https://wa.me/" + whatsappNumber + "?text=" + msg;
+        })
+        .catch(function(err){
+          console.error(err);
+          setLoading(false);
+          showStatus("הייתה שגיאה בשליחה. נסה שוב.");
+          alert("הייתה שגיאה בשליחה. נסה שוב.");
+        });
+
+      return false;
+    }
+
+    document.querySelectorAll(".meeting").forEach(card=>{
+      card.addEventListener("click",()=>card.classList.toggle("is-flipped"));
+    });
+
+    // Testimonials carousel + SWIPE on mobile
+    (function(){
+      const testimonials = [
+        {
+          name: "אלעד ושירן קטמאו",
+          text: "הגענו ליראל עם תחושת בלבול וחוסר שליטה על ההוצאות שלנו. כבר אחרי הפגישה הראשונה, קיבלנו תוכנית כלכלית ברורה ומעשית שהכניסה אותנו למסלול הנכון. בזכות הליווי המקצועי והמדויק שלו, הצלחנו לחסוך למעלה מ-8000 ש\"ח כל חודש. יראל עזר לנו להפסיק לבזבז כסף על דברים מיותרים ולבנות תשתית כלכלית יציבה עם מבט קדימה לעבר היעדים שלנו. אנחנו ממליצים עליו בחום לכל מי שמחפש פתרונות אמיתיים לניהול הכסף שלו."
+        },
+        {
+          name: "עידו ואביה זוגייר",
+          text: "יראל היקר, תודה רבה רבה על הליווי בדרך לרווחת המשפחה שלנו מבחינה כלכלית. עשית זאת בצורה כ\"כ נעימה ומכבדת ובעיקר עם המון המון מקצועיות והתמקדות בצרכים שלנו כמשפחה. תודה על כל הטיפים והטבלאות המפורטות בכדי להצליח להגיע לרווחה כלכלית. ממש מעריכים את ההכוונה המדויקת עבורנו במקצועיות ובנעימות."
+        },
+        {
+          name: "יעל ואיתן שניר",
+          text: "מהרגע הראשון היה ברור שיש פה סדר ותכל’ס. לא קיבלנו נאומים ולא סיסמאות — קיבלנו הסתכלות אמיתית על המספרים, החלטות ברורות, וכלים שהפכו את ההתנהלות היומיומית לפשוטה יותר. תוך זמן קצר הרגשנו שהלחץ יורד ושיש לנו כיוון. זה היה ליווי מדויק, אנושי, ובעיקר כזה שמחזיר ביטחון."
+        }
+      ];
+
+      const nameEl = document.getElementById("tName");
+      const textEl = document.getElementById("tText");
+      const cardEl = document.getElementById("tCard");
+      const shell  = document.getElementById("tShell");
+      const dotsWrap = document.getElementById("tDots");
+
+      let i = 0;
+      let timer = null;
+
+      function buildDots(){
+        dotsWrap.innerHTML = "";
+        testimonials.forEach((_, idx)=>{
+          const d = document.createElement("span");
+          d.className = "t-dot" + (idx === 0 ? " active" : "");
+          d.setAttribute("aria-hidden","true");
+          dotsWrap.appendChild(d);
+        });
+      }
+
+      function setActiveDot(index){
+        [...dotsWrap.children].forEach((d, idx)=>{
+          d.classList.toggle("active", idx === index);
+        });
+      }
+
+      function applySheen(){
+        shell.classList.remove("sheen");
+        void shell.offsetWidth;
+        shell.classList.add("sheen");
+      }
+
+      function show(index){
+        const t = testimonials[index];
+
+        cardEl.classList.remove("is-in");
+        cardEl.classList.add("is-out");
+
+        setTimeout(()=>{
+          nameEl.textContent = t.name;
+          textEl.textContent = t.text;
+
+          cardEl.classList.remove("is-out");
+          cardEl.classList.add("is-in");
+
+          setActiveDot(index);
+          applySheen();
+        }, 160);
+      }
+
+      function next(){ i = (i + 1) % testimonials.length; show(i); }
+      function prev(){ i = (i - 1 + testimonials.length) % testimonials.length; show(i); }
+
+      function start(){
+        if(timer) clearInterval(timer);
+        const isMobile = window.matchMedia && window.matchMedia("(max-width: 520px)").matches;
+        timer = setInterval(next, isMobile ? 3600 : 5200);
+      }
+
+      buildDots();
+      start();
+
+      shell.addEventListener("mouseenter", ()=>{ if(timer) clearInterval(timer); });
+      shell.addEventListener("mouseleave", start);
+
+      // swipe on mobile
+      let sx=0, sy=0, isTracking=false;
+      shell.addEventListener("touchstart", (e)=>{
+        if(!e.touches || !e.touches[0]) return;
+        isTracking=true;
+        sx=e.touches[0].clientX;
+        sy=e.touches[0].clientY;
+        if(timer) clearInterval(timer);
+      }, {passive:true});
+
+      shell.addEventListener("touchend", (e)=>{
+        if(!isTracking) return;
+        isTracking=false;
+
+        const t=(e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0] : null;
+        if(!t){ start(); return; }
+
+        const dx=t.clientX - sx;
+        const dy=t.clientY - sy;
+
+        if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2){
+          if(dx < 0) next();
+          else prev();
+        }
+
+        setTimeout(start, 900);
+      }, {passive:true});
+    })();
+  </script>
+
+</body>
+</html>
