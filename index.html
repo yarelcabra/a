@@ -29,7 +29,6 @@
       --brandText:#041a12;
 
       --accent:#667eea;
-      --accentLight:#8b9ff6;
 
       --max:1180px;
       --radius:32px;
@@ -39,47 +38,22 @@
       /* Mint-light backdrop behind QA + testimonials */
       --mintA: rgba(140, 255, 214, .20);
       --mintB: rgba(170, 255, 235, .14);
-      --mintC: rgba(255,255,255,.06);
 
-      /* WhatsApp */
-      --waGreenA: #25D366;
-      --waGreenB: #1EBE5A;
-      --waRing: rgba(37, 211, 102, .24);
-      --waBg: rgba(255,255,255,.08);
+      /* WhatsApp FAB */
+      --waGreenA:#25D366;
+      --waGreenB:#1fb85a;
+      --waRing: rgba(37, 211, 102, .22);
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%      { transform: translateY(-10px); }
-    }
-    @keyframes shimmer {
-      0%   { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(74,181,148,.18), 0 0 40px rgba(74,181,148,.10); }
-      50%      { box-shadow: 0 0 40px rgba(74,181,148,.32), 0 0 80px rgba(74,181,148,.18); }
-    }
+    @keyframes fadeInUp { from {opacity:0; transform:translateY(30px)} to {opacity:1; transform:translateY(0)} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes shimmer { 0%{background-position:-1000px 0} 100%{background-position:1000px 0} }
+    @keyframes glow { 0%,100%{box-shadow:0 0 20px rgba(74,181,148,.18),0 0 40px rgba(74,181,148,.10)} 50%{box-shadow:0 0 40px rgba(74,181,148,.32),0 0 80px rgba(74,181,148,.18)} }
 
     /* testimonials animations */
-    @keyframes tIn {
-      from { opacity: 0; transform: translateY(14px) scale(.985); filter: blur(2px); }
-      to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    }
-    @keyframes tOut {
-      from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-      to   { opacity: 0; transform: translateY(-10px) scale(.99); filter: blur(2px); }
-    }
-    @keyframes softSheen {
-      0%   { transform: translateX(110%) skewX(-12deg); opacity:.0; }
-      20%  { opacity:.55; }
-      45%  { opacity:.0; }
-      100% { transform: translateX(-110%) skewX(-12deg); opacity:0; }
-    }
+    @keyframes tIn { from{opacity:0; transform:translateY(14px) scale(.985); filter:blur(2px)} to{opacity:1; transform:translateY(0) scale(1); filter:blur(0)} }
+    @keyframes tOut { from{opacity:1; transform:translateY(0) scale(1); filter:blur(0)} to{opacity:0; transform:translateY(-10px) scale(.99); filter:blur(2px)} }
+    @keyframes softSheen { 0%{transform:translateX(110%) skewX(-12deg); opacity:0} 20%{opacity:.55} 45%{opacity:0} 100%{transform:translateX(-110%) skewX(-12deg); opacity:0} }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -98,7 +72,7 @@
       overflow-x:hidden;
     }
 
-    a{color:inherit;text-decoration:none}
+    a{color:inherit; text-decoration:none}
     p{margin:0 0 12px; line-height:1.95; color:var(--muted); font-weight:650}
     img{max-width:100%; height:auto; display:block}
 
@@ -110,7 +84,47 @@
     }
     .stack{display:flex; flex-direction:column; gap:24px; margin-top:24px;}
 
-    /* Header */
+    /* ===== Landscape block (מונע שימוש לרוחב) ===== */
+    .landscape-block{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+      background: rgba(10,14,19,.92);
+      backdrop-filter: blur(18px) saturate(160%);
+      z-index: 99999;
+    }
+    .landscape-block .lb-card{
+      width:min(560px, 100%);
+      border-radius: 26px;
+      border:1.5px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: 0 26px 70px rgba(0,0,0,.6);
+      padding: 22px 18px;
+    }
+    .landscape-block .lb-title{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-.3px;
+      color:#fff;
+    }
+    .landscape-block .lb-text{
+      margin:0;
+      font-size:14.5px;
+      line-height:1.85;
+      color: rgba(240,245,250,.84);
+      font-weight:750;
+    }
+    @media (orientation: landscape) and (max-width: 980px){
+      body{ overflow:hidden; }
+      .landscape-block{ display:flex; }
+    }
+
+    /* ===== Header ===== */
     header{
       position:sticky;
       top:0;
@@ -131,23 +145,18 @@
       min-height:78px;
     }
 
-    /* Brand */
     .brandbox{
       display:flex;
       align-items:center;
       gap:14px;
       min-width:0;
-      transition: transform .3s ease;
     }
-    .brandbox:hover{ transform: translateX(-4px); }
     .site-logo{
       height:78px;
       width:auto;
       display:block;
       filter: drop-shadow(0 12px 24px rgba(74,181,148,.35));
-      transition: filter .3s ease;
     }
-    .site-logo:hover{ filter: drop-shadow(0 16px 32px rgba(74,181,148,.5)); }
     .brand-text{min-width:0}
     .brand-text b{
       display:block;
@@ -161,7 +170,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-align:right;
     }
     .brand-text span{
       display:block;
@@ -171,7 +179,6 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      text-align:right;
     }
 
     nav{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
@@ -192,39 +199,16 @@
       cursor:pointer;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
-      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all .25s ease;
       white-space:nowrap;
-      overflow: hidden;
+      overflow:hidden;
     }
-
-    .btn, button, input, textarea, select{ font-family: inherit; }
-
-    .btn::before{
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
-      opacity: 0;
-      transition: opacity .3s ease;
-      border-radius: 16px;
-    }
-    .btn:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.28);
-      box-shadow: 0 12px 32px rgba(0,0,0,.4);
-    }
-    .btn:hover::before{ opacity: 1; }
-
     .btn.primary{
       border-color: transparent;
       background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
       color: var(--brandText);
-      box-shadow: 0 8px 24px rgba(74,181,148,.35), 0 0 0 0 rgba(74,181,148,.4);
+      box-shadow: 0 8px 24px rgba(74,181,148,.35);
       animation: glow 3s ease-in-out infinite;
-    }
-    .btn.primary:hover{
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 16px 40px rgba(74,181,148,.45), 0 0 60px rgba(74,181,148,.3);
     }
 
     /* Card */
@@ -240,49 +224,26 @@
       padding:36px;
       overflow:hidden;
       animation: fadeInUp .6s ease-out backwards;
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-    .card::before{
-      content: '';
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background: linear-gradient(135deg, rgba(74,181,148,.20), rgba(102,126,234,.15));
-      border-radius: var(--radius);
-      opacity: 0;
-      transition: opacity .3s ease;
-      z-index: -1;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: var(--shadowXL);
-    }
-    .card:hover::before{ opacity: 1; }
-
-    .stack > .card:nth-child(1) { animation-delay: .1s; }
-    .stack > .card:nth-child(2) { animation-delay: .2s; }
-    .stack > .card:nth-child(3) { animation-delay: .3s; }
-    .stack > .card:nth-child(4) { animation-delay: .4s; }
-    .stack > .card:nth-child(5) { animation-delay: .5s; }
-    .stack > .card:nth-child(6) { animation-delay: .6s; }
-    .stack > .card:nth-child(7) { animation-delay: .7s; }
+    .card:hover{ transform: translateY(-3px); box-shadow: var(--shadowXL); }
 
     /* HERO */
-    .hero-card{ padding-bottom: 0; }
+    .hero-card{ padding-bottom:0; }
     .hero-inner{
       display:grid;
       grid-template-columns: 1fr 360px;
       gap:22px;
       align-items:end;
     }
-    .hero-text{ padding-bottom: 28px; }
+    .hero-text{ padding-bottom:28px; }
     .hero-photo{
       align-self:end;
       justify-self:start;
-      width: 360px;
-      max-width: 100%;
-      margin-bottom: -2px;
+      width:360px;
+      max-width:100%;
+      margin-bottom:-2px;
       filter: drop-shadow(0 18px 28px rgba(0,0,0,.55));
-      transform: translateY(2px);
       pointer-events:none;
       user-select:none;
     }
@@ -329,44 +290,28 @@
       background-clip: text;
     }
     .title.small{font-size:28px}
-    .strong{
-      color: var(--brand2);
-      font-weight:900;
-      text-shadow: 0 2px 8px rgba(74,181,148,.3);
-    }
+    .strong{ color: var(--brand2); font-weight:900; text-shadow: 0 2px 8px rgba(74,181,148,.3); }
 
-    /* Bullets (כללי) */
-    ul{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:12px;
-    }
+    /* Bullets */
+    ul{ margin:0; padding:0; list-style:none; display:grid; gap:12px; }
     li{
-      position: relative;
       border-radius:20px;
       border:1.5px solid rgba(255,255,255,.12);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
-        rgba(255,255,255,.02);
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       line-height:1.9;
       font-weight:800;
       color: rgba(240,245,250,.92);
-      transition: all .3s ease;
-      overflow: hidden;
       display:flex;
       align-items:flex-start;
       gap:14px;
       padding:18px 18px 18px 18px;
+      overflow:hidden;
+      position:relative;
     }
     li::before{
       content:"✓";
-      position:relative;
-      margin-top:4px;
       flex-shrink:0;
-      width:28px;
-      height:28px;
+      width:28px; height:28px;
       border-radius:999px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       display:flex;
@@ -374,26 +319,8 @@
       justify-content:center;
       color: var(--brandText);
       font-weight:900;
+      margin-top:4px;
     }
-    li::after{
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(74,181,148,.08), transparent);
-      transition: left .5s ease;
-    }
-    li:hover{
-      transform: translateX(-4px);
-      border-color: rgba(74,181,148,.3);
-      background:
-        linear-gradient(135deg, rgba(74,181,148,.10), rgba(255,255,255,.06)),
-        rgba(255,255,255,.04);
-      box-shadow: 0 8px 24px rgba(0,0,0,.3);
-    }
-    li:hover::after{ left: 100%; }
 
     /* About */
     .about-wrap{
@@ -411,40 +338,26 @@
       background:
         linear-gradient(rgba(10,14,19,1), rgba(10,14,19,1)) padding-box,
         linear-gradient(135deg, var(--brand), var(--brand2)) border-box;
-      box-shadow:
-        0 0 60px rgba(74,181,148,.30),
-        0 24px 60px rgba(0,0,0,.5);
+      box-shadow: 0 0 60px rgba(74,181,148,.30), 0 24px 60px rgba(0,0,0,.5);
       overflow: hidden;
       justify-self: start;
       position: relative;
-      transition: transform .4s ease, box-shadow .4s ease;
     }
     .about-photo::before{
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      content:'';
+      position:absolute;
+      top:-50%; left:-50%;
+      width:200%; height:200%;
       background: linear-gradient(45deg, transparent, rgba(74,181,148,.15), transparent);
       animation: shimmer 3s linear infinite;
     }
-    .about-photo:hover{
-      transform: scale(1.02);
-      box-shadow:
-        0 0 80px rgba(74,181,148,.45),
-        0 32px 80px rgba(0,0,0,.6);
-    }
     .about-photo img{
-      width: 100%;
-      height: 100%;
-      display:block;
-      object-fit: cover;
+      width:100%; height:100%;
+      object-fit:cover;
       object-position: 50% 42%;
       transform: scale(1.25);
-      transform-origin: center;
       position: relative;
-      z-index: 1;
+      z-index:1;
     }
     .about-text{ direction:rtl; text-align:right; }
 
@@ -458,19 +371,16 @@
     }
     .meeting{ height:300px; }
     .flip{
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       position:relative;
       transform-style:preserve-3d;
       transition:transform .75s cubic-bezier(.2,.8,.2,1);
       border-radius:34px;
-      will-change: transform;
     }
     .meeting:hover .flip,
     .meeting.is-flipped .flip{ transform:rotateY(180deg); }
     .face{
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       backface-visibility:hidden;
       border-radius:34px;
       padding:26px;
@@ -487,13 +397,7 @@
       justify-content:center;
       gap:10px;
     }
-    .front .m-top{
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:-.2px;
-      opacity:.92;
-      margin:0;
-    }
+    .front .m-top{ font-size:18px; font-weight:900; opacity:.92; margin:0; }
     .front .m-title{
       margin:0;
       width:100%;
@@ -503,9 +407,7 @@
       line-height:1.2;
       letter-spacing:-.4px;
       min-height:62px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
     }
     .back{
       background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
@@ -555,50 +457,26 @@
       text-align:center;
     }
     .between-icon{
-      flex:0 0 auto;
       width:46px; height:46px;
       border-radius:16px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
       color: var(--brandText);
       font-weight:900;
       box-shadow: 0 16px 30px rgba(0,0,0,.35);
     }
-    .between h3{
-      margin:0;
-      font-size:20px;
-      font-weight:900;
-      letter-spacing:-.3px;
-      color:#fff;
-      text-align:center;
-    }
-    .between p{
-      margin:6px 0 0;
-      color: rgba(240,245,250,.86);
-      line-height:1.9;
-      font-weight:750;
-      max-width: 78ch;
-      text-align:center;
-    }
-    .chips{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
+    .between h3{ margin:0; font-size:20px; font-weight:900; color:#fff; }
+    .between p{ margin:6px 0 0; color: rgba(240,245,250,.86); line-height:1.9; font-weight:750; max-width:78ch; }
+    .chips{ margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
     .chip{
       border:1.5px solid rgba(255,255,255,.14);
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
-      color: #ffffff;
+      background: rgba(255,255,255,.05);
+      color: rgba(240,245,250,.92);
       padding:10px 12px;
       border-radius:999px;
       font-weight:900;
       font-size:13px;
       letter-spacing:-.2px;
-      box-shadow: 0 10px 22px rgba(0,0,0,.22);
     }
     .mini-cta{
       margin-top:12px;
@@ -615,18 +493,9 @@
     /* FAQ */
     .faq details{
       border:1.5px solid rgba(255,255,255,.12);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
-        rgba(255,255,255,.02);
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border-radius:20px;
       padding:18px 18px;
-      transition: all .3s ease;
-    }
-    .faq details:hover{
-      border-color: rgba(74,181,148,.3);
-      background:
-        linear-gradient(135deg, rgba(74,181,148,.08), rgba(255,255,255,.06)),
-        rgba(255,255,255,.04);
     }
     .faq details + details{margin-top:12px}
     .faq summary{
@@ -635,33 +504,23 @@
       list-style:none;
       line-height:1.6;
       color: var(--text);
-      transition: color .3s ease;
     }
     .faq summary::-webkit-details-marker{display:none}
-    .faq details[open] summary{
-      color: var(--brand2);
-      text-shadow: 0 2px 8px rgba(74,181,148,.3);
-    }
     .faq .answer{
       margin-top:12px;
       color: rgba(240,245,250,.82);
       font-weight:650;
       line-height:1.95;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.1);
     }
     .faq .title.small{ text-align:center; }
-    .qmark{
-      color: var(--brand2);
-      font-weight:900;
-      text-shadow: 0 2px 10px rgba(74,181,148,.22);
-    }
+    .qmark{ color: var(--brand2); font-weight:900; text-shadow: 0 2px 10px rgba(74,181,148,.22); }
 
     /* Form */
     .form-shell{max-width: 680px; margin: 0 auto;}
     .form{display:grid; gap:16px;}
     .row-2{display:grid; grid-template-columns: 1fr 1fr; gap:16px;}
-
     label{
       display:block;
       margin:0 0 8px;
@@ -680,13 +539,12 @@
       outline:none;
       font-size:16px;
       font-weight:650;
-      transition: all .3s ease;
+      transition: all .2s ease;
       font-family: inherit;
     }
     input::placeholder, textarea::placeholder{
-      color: rgba(240,245,250,.42);
+      color: rgba(240,245,250,.40);
       font-weight:650;
-      font-size: 14px;
     }
     input:focus, textarea:focus{
       border-color: var(--brand);
@@ -737,20 +595,11 @@
       flex-wrap:wrap;
       font-weight:800;
     }
-    footer a{
-      border-bottom:1px dashed rgba(240,245,250,.4);
-      transition: all .3s ease;
-    }
-    footer a:hover{
-      color: var(--brand2);
-      border-bottom-color: var(--brand2);
-    }
+    footer a{ border-bottom:1px dashed rgba(240,245,250,.4); }
+    footer a:hover{ color: var(--brand2); border-bottom-color: var(--brand2); }
 
     /* ===== ASD (למי זה מתאים) ===== */
-    .fit-section{
-      position:relative;
-      padding-top: 210px;
-    }
+    .fit-section{ position:relative; padding-top: 210px; }
     .section-title{
       position:absolute;
       top:18px;
@@ -781,6 +630,7 @@
       position:relative;
       z-index:1;
     }
+
     .fit-card{
       position:relative;
       border-radius:28px;
@@ -791,6 +641,7 @@
       box-shadow: 0 18px 50px rgba(0,0,0,.35);
       overflow:visible;
     }
+
     .fit-figure{
       position:absolute;
       left:50%;
@@ -802,22 +653,9 @@
       filter: drop-shadow(0 22px 32px rgba(0,0,0,.6));
       pointer-events:none;
     }
-    .fit-h{
-      margin:0 0 8px;
-      font-size:21px;
-      font-weight:900;
-      letter-spacing:-.3px;
-      color:#fff;
-      text-align:center;
-    }
-    .fit-p{
-      margin:0;
-      font-size:15px;
-      line-height:1.8;
-      color: rgba(240,245,250,.86);
-      font-weight:750;
-      text-align:center;
-    }
+
+    .fit-h{ margin:0 0 8px; font-size:21px; font-weight:900; color:#fff; text-align:center; }
+    .fit-p{ margin:0; font-size:15px; line-height:1.8; color: rgba(240,245,250,.86); font-weight:750; text-align:center; }
 
     .not-wrap{
       margin-top:22px;
@@ -844,10 +682,7 @@
       margin:0 0 12px;
       font-size:30px;
       font-weight:900;
-      letter-spacing:-.3px;
       color:#fff;
-      position:relative;
-      z-index:1;
       text-shadow: 0 10px 26px rgba(0,0,0,.45);
     }
     .not-grid{
@@ -874,7 +709,6 @@
       position:relative;
       overflow:hidden;
       box-shadow: 0 10px 24px rgba(0,0,0,.22);
-      transform:none;
     }
     .not-item::before{ content:none !important; display:none !important; }
     .not-item::after{
@@ -882,14 +716,11 @@
       position:absolute;
       inset:0;
       background: radial-gradient(720px 260px at 85% 0%, rgba(255,77,109,.16) 0%, transparent 62%);
-      opacity:1;
       pointer-events:none;
     }
-    .not-item:hover{ transform:none; }
     .not-item .mark{
       flex:0 0 auto;
-      width:32px;
-      height:32px;
+      width:32px; height:32px;
       border-radius:999px;
       display:flex;
       align-items:center;
@@ -903,7 +734,7 @@
     }
     .not-item span:last-child{ z-index:1; }
 
-    /* ===== QA + Testimonials zone (mint-light behind cards; cards stay same) ===== */
+    /* ===== QA zone ===== */
     .qa-zone{
       position:relative;
       border-radius: 36px;
@@ -916,37 +747,16 @@
       box-shadow: 0 18px 55px rgba(0,0,0,.28);
       overflow:hidden;
     }
-    .qa-zone::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius: 38px;
-      background: linear-gradient(135deg, rgba(74,181,148,.18), rgba(102,126,234,.12));
-      opacity:.0;
-      transition: opacity .35s ease;
-      z-index:-1;
-    }
-    .qa-zone:hover::before{ opacity:.9; }
-
     .qa-row{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:24px;
       align-items:stretch;
     }
-    .qa-row > .card{
-      height:100%;
-      display:flex;
-      flex-direction:column;
-    }
+    .qa-row > .card{ height:100%; display:flex; flex-direction:column; }
 
-    /* ===== Testimonials (carousel) ===== */
-    .testimonials{ position:relative; }
-    .testimonials .title.small{
-      text-align:center;
-      margin-bottom: 14px;
-    }
-
+    /* ===== Testimonials ===== */
+    .testimonials .title.small{ text-align:center; margin-bottom:14px; }
     .t-shell{
       position:relative;
       border-radius: 24px;
@@ -965,30 +775,21 @@
       text-align:center;
       touch-action: pan-y;
     }
-
     .t-shell::after{
       content:"";
       position:absolute;
       top:-40%;
       left:-60%;
-      width: 160%;
-      height: 220%;
+      width:160%;
+      height:220%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
-      opacity:.0;
+      opacity:0;
       transform: translateX(110%) skewX(-12deg);
       pointer-events:none;
     }
-    .t-shell.sheen::after{
-      animation: softSheen 3.8s ease-in-out 1;
-      opacity: 1;
-    }
+    .t-shell.sheen::after{ animation: softSheen 3.8s ease-in-out 1; opacity:1; }
 
-    .t-card{
-      width:100%;
-      max-width: 52ch;
-      padding: 10px 6px;
-      will-change: transform, opacity, filter;
-    }
+    .t-card{ width:100%; max-width:52ch; padding:10px 6px; will-change: transform, opacity, filter; }
     .t-name{
       margin:0 0 10px;
       font-size: 18px;
@@ -1009,17 +810,9 @@
     .t-card.is-in{ animation: tIn .52s ease both; }
     .t-card.is-out{ animation: tOut .42s ease both; }
 
-    .t-dots{
-      margin-top: 14px;
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
+    .t-dots{ margin-top:14px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
     .t-dot{
-      width:8px;
-      height:8px;
+      width:8px; height:8px;
       border-radius:999px;
       border: 1px solid rgba(255,255,255,.28);
       background: rgba(255,255,255,.10);
@@ -1035,18 +828,11 @@
       box-shadow: 0 0 0 3px rgba(74,181,148,.16);
     }
 
-    /* ===== Form centered below FAQ+Testimonials ===== */
-    .lead-row{
-      margin-top: 22px;
-      display:flex;
-      justify-content:center;
-    }
-    .lead-card{
-      width: min(720px, 100%);
-      padding: 32px;
-    }
+    /* ===== Form centered below ===== */
+    .lead-row{ margin-top:22px; display:flex; justify-content:center; }
+    .lead-card{ width: min(720px, 100%); padding: 32px; }
 
-    /* ===== WhatsApp fixed icon (SAME look on desktop + mobile) ===== */
+    /* ===== WhatsApp fixed icon (קלאסי, לא מתעוות) ===== */
     .wa-fab{
       position:fixed;
       right:18px;
@@ -1057,84 +843,23 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background: linear-gradient(135deg, var(--waGreenA) 0%, var(--waGreenB) 100%);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 44px rgba(0,0,0,.48);
+      background: linear-gradient(135deg, var(--waGreenA), var(--waGreenB));
+      border: 1.5px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 44px rgba(0,0,0,.50), 0 0 0 0 var(--waRing);
       z-index: 999;
-      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+      transition: transform .18s ease, box-shadow .18s ease;
       -webkit-tap-highlight-color: transparent;
-      overflow:hidden;
-    }
-    .wa-fab::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius:20px;
-      background: radial-gradient(900px 280px at 30% 20%, rgba(255,255,255,.22) 0%, transparent 55%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .wa-fab::after{
-      content:"";
-      position:absolute;
-      inset:-6px;
-      border-radius:24px;
-      box-shadow: 0 0 0 10px var(--waRing);
-      opacity:.55;
-      pointer-events:none;
     }
     .wa-fab:hover{
       transform: translateY(-2px);
-      box-shadow: 0 22px 58px rgba(0,0,0,.58);
-      filter: saturate(1.08);
+      box-shadow: 0 22px 56px rgba(0,0,0,.60), 0 0 0 6px var(--waRing);
     }
     .wa-icon{
       width:28px;
       height:28px;
       display:block;
-      fill:#ffffff;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.22));
-      position:relative;
-      z-index:1;
-    }
-
-    /* ===== Landscape blocker (option 1) ===== */
-    #landscapeBlocker{
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      display: none;
-      place-items: center;
-      text-align: center;
-      padding: 24px;
-      background: rgba(10,14,19,.96);
-      backdrop-filter: blur(16px);
-    }
-    #landscapeBlocker .box{
-      max-width: 520px;
-      width: 100%;
-      border-radius: 22px;
-      border: 1.5px solid rgba(255,255,255,.14);
-      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      padding: 18px 16px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.55);
-    }
-    #landscapeBlocker h3{
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 900;
-      color: rgba(255,255,255,.96);
-    }
-    #landscapeBlocker p{
-      margin: 0;
-      font-size: 14.5px;
-      line-height: 1.9;
-      color: rgba(240,245,250,.86);
-      font-weight: 750;
-    }
-    @media (max-width: 820px) and (orientation: landscape){
-      #landscapeBlocker{ display: grid; }
-      body{ overflow: hidden; }
+      fill:#fff;          /* לבן ברור */
+      stroke:none;        /* לא stroke כדי לא להתעוות */
     }
 
     /* ===== Desktop -> Tablet ===== */
@@ -1149,18 +874,9 @@
 
       .meetings{grid-template-columns:1fr}
       .meeting{height:290px}
-      .front .m-title{min-height:auto}
 
-      .about-wrap{
-        direction:rtl;
-        grid-template-columns: 1fr;
-        text-align:center;
-      }
-      .about-photo{
-        width: 280px;
-        height: 280px;
-        justify-self:center;
-      }
+      .about-wrap{ direction:rtl; grid-template-columns: 1fr; text-align:center; }
+      .about-photo{ width: 280px; height: 280px; justify-self:center; }
       .about-text{text-align:center}
 
       .card{padding: 28px 24px;}
@@ -1178,92 +894,77 @@
       .lead-card{ padding: 28px 24px; }
 
       .hero-inner{ grid-template-columns: 1fr; }
-      .hero-photo{
-        width: 300px;
-        justify-self:center;
-        margin-bottom:-8px;
-      }
+      .hero-photo{ width: 300px; justify-self:center; margin-bottom:-8px; }
       .hero-text{ padding-bottom: 18px; text-align:center; }
       .hero-cta{ justify-content:center; }
     }
 
-    /* ===== Mobile only (changes only for mobile) ===== */
+    /* ===== Mobile only ===== */
     @media (max-width: 520px){
       .wrap{ padding:14px 12px 88px; }
       .stack{ gap:18px; margin-top:18px; }
       .card{ padding: 22px 18px; border-radius: 26px; }
       .qa-zone{ padding: 14px; border-radius: 24px; }
 
-      /* Titles on mobile: solid */
-      h1,
-      .title,
-      .section-title{
-        background: none !important;
-        -webkit-background-clip: initial !important;
+      /* כותרות פחות דהויות */
+      h1, .title, .section-title{
+        background:none !important;
         -webkit-text-fill-color: unset !important;
         color: rgba(255,255,255,.96) !important;
         text-shadow: 0 10px 26px rgba(0,0,0,.55) !important;
       }
 
-      h1{ font-size: 30px; line-height: 1.12; letter-spacing:-.8px; margin-bottom: 12px; }
-      .hero-subtitle{ font-size: 16px; line-height: 1.55; margin-bottom: 10px; }
-      .hero-p{ font-size: 14.5px; line-height: 1.9; margin-bottom: 14px; }
-      p{ font-size: 14.5px; line-height: 1.9; }
-
-      /* Header pyramid */
+      /* ===== Header pyramid (לוגו מעל, ואז יראל, ואז תפקיד) ===== */
       .header-in{
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 12px 12px;
-        min-height: 0;
+        justify-content:center;
+        gap:8px;
+        padding:10px 12px 12px;
+        min-height: unset;
       }
       .brandbox{
         flex-direction: column;
-        align-items: center;
-        gap: 6px;
+        align-items:center;
+        gap:4px;            /* צמוד יותר */
+        width:100%;
       }
       .site-logo{
-        height: 84px;
+        height:92px;        /* לוגו גדול יותר */
       }
       .brand-text{
-        text-align: center;
+        text-align:center;
       }
-      .brand-text b,
+      .brand-text b{
+        font-size:17px;
+      }
       .brand-text span{
-        text-align: center;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: unset;
+        font-size:13px;
       }
-      .brand-text b{ font-size: 18px; }
-      .brand-text span{ font-size: 13.5px; opacity: .96; }
 
-      /* Smaller buttons on mobile */
       nav{
-        width: 100%;
-        justify-content: center;
-        gap: 10px;
+        width:100%;
+        gap:8px;
+        justify-content:center;
       }
       nav .btn{
-        padding: 10px 12px;
-        font-size: 13px;
-        border-radius: 14px;
-      }
-      nav .btn.primary{
-        padding: 10px 12px;
+        padding:10px 12px;   /* כפתורים קטנים */
+        font-size:13.5px;
+        border-radius:14px;
       }
 
-      /* Process on mobile: show both faces (no flip) */
+      h1{ font-size: 30px; line-height: 1.12; letter-spacing:-.8px; margin-bottom: 12px; }
+      .hero-subtitle{ font-size: 16px; line-height: 1.55; margin-bottom: 10px; }
+      .hero-p{ font-size: 14.5px; line-height: 1.9; margin-bottom: 14px; }
+
+      .title{ font-size: 22px; line-height:1.18; margin-bottom: 14px; }
+      .title.small{ font-size: 20px; margin-bottom: 12px; }
+      p{ font-size: 14.5px; line-height: 1.9; }
+
+      /* תהליך – במובייל מציגים גם כותרת וגם טקסט */
       .meetings{ gap:14px; }
       .meeting{ height:auto !important; }
-      .flip{
-        height:auto !important;
-        transform: none !important;
-        transform-style: flat !important;
-        transition: none !important;
-      }
+      .flip{ height:auto !important; transform:none !important; transform-style:flat !important; transition:none !important; }
       .face{
         position: relative !important;
         inset: auto !important;
@@ -1274,80 +975,70 @@
         display:block !important;
         text-align:center !important;
       }
-      .front{ box-shadow: 0 18px 44px rgba(74,181,148,.18) !important; }
-      .back{
-        margin-top:12px;
-        border-radius: 22px !important;
-        padding:18px !important;
-      }
+      .back{ margin-top:12px; border-radius:22px !important; padding:18px !important; }
       .front .m-top{ font-size:15px; }
       .front .m-title{ font-size:20px; min-height:auto; }
       .m-text{ font-size:14.5px; line-height:1.9; max-width:none; }
 
-      /* Remove between icon only on mobile */
-      .between-top{ gap:0; }
+      /* להסיר את הוי בין פגישה לפגישה */
       .between-icon{ display:none !important; }
+      .between-top{ gap:0; }
 
-      /* "למי זה מתאים" – closer images to their card titles, more out of card, no collision with main title */
-      .fit-section{ padding-top: 92px; }
-      .section-title{ top: 14px; font-size: 24px; }
-
-      .fit-grid{
-        gap: 22px; /* more space between cards on mobile */
-      }
+      /* "למי זה מתאים" – תמונות קרובות יותר לכותרות + יוצאות מהכרטיס */
       .fit-card{
-        overflow: visible;          /* allow image to go out */
-        padding-top: 170px;         /* space for image so it won't touch card title */
-        border-radius: 24px;
+        overflow: hidden;
+        padding-top: 196px;     /* מקום לתמונה */
       }
       .fit-figure{
-        width: 292px;
-        top: 10px;                  /* pushes image upward (out of card) */
-        transform: translate(-50%, 0);
-        filter: drop-shadow(0 22px 32px rgba(0,0,0,.55));
+        width: 285px;           /* גודל */
+        top: 84px;              /* מיקום (קרוב לכותרת) */
+        transform: translate(-50%, -56%);
       }
-      .fit-h{ font-size:18px; margin-top: 6px; }
+      .fit-h{ font-size:18px; margin-top:0; }
       .fit-p{ font-size:14.5px; line-height:1.85; }
 
-      /* Testimonials faster on mobile */
-      .t-card.is-in{ animation-duration: .32s !important; }
-      .t-card.is-out{ animation-duration: .26s !important; }
+      /* placeholders בטופס – קטן יותר כדי שיראו את הדוגמאות */
+      input::placeholder, textarea::placeholder{
+        font-size: 13px;
+      }
+
       .t-shell{ padding: 16px; min-height: 290px; }
       .t-name{ font-size: 16px; }
       .t-text{ font-size: 13.8px; line-height: 1.9; }
 
-      /* Form placeholders smaller on mobile (more readable) */
-      input::placeholder, textarea::placeholder{
-        font-size: 12.5px;
-        opacity: .9;
-      }
+      li{ font-size: 14.5px; line-height: 1.85; }
+      .faq summary{ font-size: 14.5px; }
+      .faq .answer{ font-size: 14.5px; }
 
-      /* WhatsApp FAB sizing on mobile */
-      .wa-fab{ width:56px; height:56px; right:14px; bottom:14px; border-radius:18px; }
+      label{ font-size: 12.5px; }
+      input, textarea{ font-size: 15px; padding: 14px 14px; border-radius: 16px; }
+      textarea{ min-height: 120px; }
+
+      .wa-fab{ width:56px; height:56px; right:14px; bottom:14px; border-radius:16px; }
       .wa-icon{ width:28px; height:28px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Landscape blocker (Option 1) -->
-  <div id="landscapeBlocker" aria-hidden="true">
-    <div class="box">
-      <h3>כדי לצפות נכון באתר</h3>
-      <p>סובבו את הטלפון למצב אורך.</p>
+  <!-- Landscape block overlay -->
+  <div class="landscape-block" aria-hidden="true">
+    <div class="lb-card">
+      <h2 class="lb-title">לצפייה מיטבית</h2>
+      <p class="lb-text">סובבו את הטלפון למצב אנכי (Portrait).</p>
     </div>
   </div>
 
-  <!-- WhatsApp fixed icon -->
+  <!-- WhatsApp fixed icon (קלאסי) -->
   <a class="wa-fab"
      href="https://wa.me/972543944984?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%90%D7%9C%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94"
      target="_blank"
      rel="noopener"
      aria-label="וואטסאפ">
-    <!-- WhatsApp classic logo (white) -->
-    <svg class="wa-icon" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M19.11 17.62c-.28-.14-1.64-.81-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.74.9-.91 1.08-.17.19-.33.21-.61.07-.28-.14-1.2-.44-2.28-1.41-.84-.75-1.41-1.68-1.57-1.96-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.43 0 1.43 1.03 2.8 1.17 3 .14.19 2.03 3.1 4.93 4.34.69.3 1.23.47 1.65.6.69.22 1.31.19 1.81.12.55-.08 1.64-.67 1.87-1.31.23-.64.23-1.19.16-1.31-.07-.12-.26-.19-.55-.33z"/>
-      <path d="M26.67 5.33A14.5 14.5 0 0 0 3.93 22.62L2.33 29.67l7.22-1.55A14.5 14.5 0 0 0 29.67 16c0-3.87-1.5-7.5-3-10.67zM16 28.17c-2.39 0-4.63-.67-6.55-1.83l-.47-.28-4.29.92.92-4.18-.3-.49A12.14 12.14 0 1 1 16 28.17z"/>
+    <!-- WhatsApp logo SVG (classic) -->
+    <svg class="wa-icon" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path d="M19.11 17.53c-.27-.13-1.6-.79-1.85-.88-.25-.09-.44-.13-.62.13-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.13-1.13-.42-2.15-1.34-.79-.7-1.33-1.56-1.49-1.82-.16-.27-.02-.41.12-.54.12-.12.27-.32.41-.48.13-.16.18-.27.27-.44.09-.18.04-.33-.02-.46-.07-.13-.62-1.5-.85-2.06-.22-.53-.44-.46-.62-.46h-.53c-.18 0-.46.07-.7.33-.25.27-.93.91-.93 2.22 0 1.31.96 2.58 1.09 2.75.13.18 1.89 2.89 4.58 4.06.64.28 1.14.44 1.53.56.64.2 1.22.17 1.68.1.51-.08 1.6-.65 1.82-1.28.22-.62.22-1.16.16-1.28-.07-.12-.25-.2-.52-.33z"/>
+      <path d="M27.44 4.56C24.52 1.62 20.63 0 16.5 0 8.23 0 1.5 6.73 1.5 15c0 2.64.69 5.22 2.01 7.49L1.37 32l9.73-2.55A14.93 14.93 0 0 0 16.5 30c8.27 0 15-6.73 15-15 0-4.13-1.62-8.02-4.56-10.44zm-10.94 23A12.4 12.4 0 0 1 11 25.98l-.39-.23-5.78 1.52 1.54-5.64-.25-.41A12.42 12.42 0 0 1 4.1 15c0-6.84 5.56-12.4 12.4-12.4 3.31 0 6.43 1.29 8.77 3.63A12.33 12.33 0 0 1 28.9 15c0 6.84-5.56 12.56-12.4 12.56z"/>
     </svg>
   </a>
 
@@ -1475,9 +1166,7 @@
                 <h3 class="m-title">מיפוי ותכנון כלכלי</h3>
               </div>
               <div class="face back">
-                <p class="m-text">
-                  סקירה מלאה של הכנסות/הוצאות/הלוואות/התחייבויות. תמונת מצב ברורה + תקציב חדש ומאוזן שמחזיר שליטה כבר מההתחלה.
-                </p>
+                <p class="m-text">סקירה מלאה של הכנסות/הוצאות/הלוואות/התחייבויות. תמונת מצב ברורה + תקציב חדש ומאוזן שמחזיר שליטה כבר מההתחלה.</p>
               </div>
             </div>
           </article>
@@ -1489,9 +1178,7 @@
                 <h3 class="m-title">בקרה והעמקה</h3>
               </div>
               <div class="face back">
-                <p class="m-text">
-                  בדיקת יישום בפועל, תיקון נקודות חלשות, והעמקה בהרגלי צריכה עם כלים מעשיים לחיסכון עקבי.
-                </p>
+                <p class="m-text">בדיקת יישום בפועל, תיקון נקודות חלשות, והעמקה בהרגלי צריכה עם כלים מעשיים לחיסכון עקבי.</p>
               </div>
             </div>
           </article>
@@ -1503,9 +1190,7 @@
                 <h3 class="m-title">בניית תוכנית חיסכון</h3>
               </div>
               <div class="face back">
-                <p class="m-text">
-                  תוכנית חיסכון ליעדים הגדולים, היערכות לאירועים משמעותיים, והנחת יסודות לביטחון כלכלי ארוך טווח.
-                </p>
+                <p class="m-text">תוכנית חיסכון ליעדים הגדולים, היערכות לאירועים משמעותיים, והנחת יסודות לביטחון כלכלי ארוך טווח.</p>
               </div>
             </div>
           </article>
@@ -1516,10 +1201,7 @@
             <div class="between-icon">✓</div>
             <div>
               <h3>בין פגישה לפגישה אתם לא לבד</h3>
-              <p>
-                רוב האנשים מבינים מה צריך לעשות — אבל נופלים ביישום. כאן בדיוק נכנס הליווי:
-                מענה מהיר, חידוד החלטות בזמן אמת, ודיוק שבועי קטן שמצטבר לתוצאות גדולות בחשבון הבנק.
-              </p>
+              <p>רוב האנשים מבינים מה צריך לעשות — אבל נופלים ביישום. כאן בדיוק נכנס הליווי: מענה מהיר, חידוד החלטות בזמן אמת, ודיוק שבועי קטן שמצטבר לתוצאות גדולות בחשבון הבנק.</p>
             </div>
           </div>
 
@@ -1537,8 +1219,8 @@
 
       <!-- QA + Testimonials + Form -->
       <section class="qa-zone" aria-label="שאלות + המלצות + טופס">
-        <div class="qa-row">
 
+        <div class="qa-row">
           <!-- Testimonials -->
           <section class="card testimonials" aria-label="המלצות">
             <h2 class="title small">המלצות:</h2>
@@ -1629,6 +1311,7 @@
             </div>
           </section>
         </div>
+
       </section>
 
     </div>
@@ -1672,6 +1355,7 @@
       btn.textContent = isLoading ? "שולח…" : "יראל, בוא נעשה סדר";
     }
 
+    // ✅ הטופס: שולח למייל בלבד ואז מעביר לדף תודה (בלי וואטסאפ)
     function handleSubmit(e){
       e.preventDefault();
 
@@ -1692,9 +1376,8 @@
 
       emailjs.send("service_2kq8ggn", "template_48054rn", data)
         .then(function(){
-          const whatsappNumber = "972543944984";
-          const msg = encodeURIComponent("היי יראל, אשמח לשיחת התאמה");
-          window.location.href = "https://wa.me/" + whatsappNumber + "?text=" + msg;
+          // מעבר לדף תודה
+          window.location.href = "thankyou.html";
         })
         .catch(function(err){
           console.error(err);
@@ -1706,11 +1389,12 @@
       return false;
     }
 
+    // flip cards
     document.querySelectorAll(".meeting").forEach(card=>{
       card.addEventListener("click",()=>card.classList.toggle("is-flipped"));
     });
 
-    // ===== Testimonials carousel + SWIPE on mobile =====
+    // Testimonials carousel + swipe
     (function(){
       const testimonials = [
         {
@@ -1719,7 +1403,7 @@
         },
         {
           name: "עידו ואביה זוגייר",
-          text: "יראל היקר, תודה רבה רבה על הליווי בדרך לרווחת המשפחה שלנו מבחינה כלכלית. עשית זאת בצורה כ\"כ נעימה ומכבדת ובעיקר עם המון המון מקצועיות והתמקדות בצרכים שלנו כמשפחה. תודה על כל הטיפים והטבלאות המפורטות בכדי להצליח להגיע לרווחה כלכלית. ממש מעריכים את ההכוונה המדויקת עבורנו במקצועיות ובנעימות."
+          text: "יראל היקר, תודה רבה רבה על הליווי בדרך לרווחת המשפחה שלנו מבחינה כלכלית. עשית זאת בצורה כ\"כ נעימה ומכבדת ובעיקר עם המון המון מקצועיות והתמקדות בצרכים שלנו כמשפחה. תודה על כל הטיפים והטבלאות המפורטות בכדי להצליח להגיע לרווחה כלכלית. ממש  מעריכים את ההכוונה המדויקת עבורנו במקצועיות ובנעימות."
         },
         {
           name: "יעל ואיתן שניר",
@@ -1776,15 +1460,8 @@
         }, 160);
       }
 
-      function next(){
-        i = (i + 1) % testimonials.length;
-        show(i);
-      }
-
-      function prev(){
-        i = (i - 1 + testimonials.length) % testimonials.length;
-        show(i);
-      }
+      function next(){ i = (i + 1) % testimonials.length; show(i); }
+      function prev(){ i = (i - 1 + testimonials.length) % testimonials.length; show(i); }
 
       function start(){
         if(timer) clearInterval(timer);
@@ -1795,12 +1472,11 @@
       buildDots();
       start();
 
-      // pause on hover (desktop)
       shell.addEventListener("mouseenter", ()=>{ if(timer) clearInterval(timer); });
       shell.addEventListener("mouseleave", start);
 
-      // swipe on mobile
       let sx = 0, sy = 0, isTracking = false;
+
       shell.addEventListener("touchstart", (e)=>{
         if(!e.touches || !e.touches[0]) return;
         isTracking = true;
